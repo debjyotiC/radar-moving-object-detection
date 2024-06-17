@@ -68,8 +68,6 @@ for folder in range(len(all_targets)):
             data = calc_range_doppler(df_data, col, configParameters)
             cfar_data = apply_2d_cfar(data, guard_band_width=3, kernel_size=5, threshold_factor=1)
 
-            denoised_cfar_data = apply_2d_cfar(data, guard_band_width=3, kernel_size=5, threshold_factor=1)
-
             out_x_range_doppler.append(data)
             out_x_range_doppler_cfar.append(cfar_data)
             out_y_range_doppler.append(folder + 1)

@@ -55,7 +55,7 @@ validation_dataset = validation_dataset.batch(BATCH_SIZE, drop_remainder=False)
 
 history = model.fit(train_dataset, epochs=40, validation_data=validation_dataset)
 
-model.save("saved-model/umbc_indoor_cfar_denoised")
+model.save("saved-model/umbc_indoor_cfar")
 
 predicted_labels = model.predict(x_test)
 actual_labels = y_test
