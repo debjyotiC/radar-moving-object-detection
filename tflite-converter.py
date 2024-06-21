@@ -3,10 +3,10 @@ import numpy as np
 
 
 type_of_quantization = "default"
-saved_model_dir = "saved-model/umbc_indoor_cfar"
+saved_model_dir = "saved-model/umbc_new_cfar"
 BATCH_SIZE = 70
 
-range_doppler_features = np.load("data/npz_files/umbc_cfar.npz", allow_pickle=True)
+range_doppler_features = np.load("data/npz_files/umbc_new.npz", allow_pickle=True)
 
 x_data, y_data = range_doppler_features['out_x'], range_doppler_features['out_y']
 

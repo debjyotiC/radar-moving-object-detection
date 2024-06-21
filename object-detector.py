@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-range_doppler_features = np.load("data/npz_files/umbc_cfar.npz", allow_pickle=True)
+range_doppler_features = np.load("data/npz_files/umbc_new_cfar.npz", allow_pickle=True)
 
 x_data, y_data = range_doppler_features['out_x'], range_doppler_features['out_y']
 
@@ -29,17 +29,16 @@ validation_dataset = tf.data.Dataset.from_tensor_slices((x_val, y_val))
 test_dataset = tf.data.Dataset.from_tensor_slices((x_test, y_test))
 
 model = tf.keras.Sequential([
-    tf.keras.layers.Reshape((16, 256, 1), input_shape=x_train.shape[1:]),
-    tf.keras.layers.Conv2D(32, (2, 2), activation='relu'),
+    tf.keras.layers.Reshape((8, 128, 1), input_shape=x_train.shape[1:]),
+    tf.keras.layers.Conv2D(16, (2, 2), activation='relu'),
     tf.keras.layers.MaxPooling2D(2, 2),
-    tf.keras.layers.Conv2D(32, (2, 2), activation='relu'),
+    tf.keras.layers.Conv2D(16, (2, 2), activation='relu'),
     tf.keras.layers.MaxPooling2D(2, 2),
-    tf.keras.layers.Conv2D(64, (2, 2), activation='relu'),
-    tf.keras.layers.MaxPooling2D(2, 2),
+    tf.keras.layers.Conv2D(8, (2, 2), activation='relu', padding='same'),  # Use 'same' padding to maintain dimensions
+    tf.keras.layers.MaxPooling2D((1, 2)),  # Adjust pooling to only reduce width
 
     tf.keras.layers.Flatten(),
     tf.keras.layers.Dense(64, activation='relu'),
-    tf.keras.layers.Dropout(0.25),
     tf.keras.layers.Dense(classes, activation='softmax')
 ])
 
@@ -49,13 +48,13 @@ model.compile(loss=tf.keras.losses.CategoricalCrossentropy(),
               optimizer=tf.keras.optimizers.Adam(learning_rate=0.001), metrics=['acc'])
 
 # this controls the batch size
-BATCH_SIZE = 80
+BATCH_SIZE = 10
 train_dataset = train_dataset.batch(BATCH_SIZE, drop_remainder=False)
 validation_dataset = validation_dataset.batch(BATCH_SIZE, drop_remainder=False)
 
-history = model.fit(train_dataset, epochs=40, validation_data=validation_dataset)
+history = model.fit(train_dataset, epochs=100, validation_data=validation_dataset)
 
-model.save("saved-model/umbc_indoor_cfar")
+model.save("saved-model/umbc_new_cfar")
 
 predicted_labels = model.predict(x_test)
 actual_labels = y_test

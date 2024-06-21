@@ -5,7 +5,7 @@ import time
 type_of_quantization = "default"
 model_path = f"saved-tflite-model/range-doppler-{type_of_quantization}.tflite"
 
-range_doppler_features = np.load("data/npz_files/umbc_cfar.npz", allow_pickle=True)
+range_doppler_features = np.load("data/npz_files/umbc_new_cfar.npz", allow_pickle=True)
 x_data, y_data = range_doppler_features['out_x'], range_doppler_features['out_y']
 
 interpreter = tf.lite.Interpreter(model_path=model_path)
