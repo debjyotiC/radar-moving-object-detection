@@ -76,4 +76,4 @@ data_range_x = np.array(out_x_range_doppler)
 data_range_cfar_x = np.array(out_x_range_doppler_cfar)
 data_range_y = np.array(out_y_range_doppler)
 
-np.savez('data/npz_files/umbc_tent_2_cfar.npz', out_x=data_range_cfar_x, out_y=data_range_y)
+np.savez('data/npz_files/umbc_tent_3_cfar.npz', out_x=data_range_cfar_x, out_y=data_range_y)
