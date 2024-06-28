@@ -52,6 +52,6 @@ def parseConfigFile(configFileName, Rx_Ant, Tx_Ant):
     return configParameters
 
 
-d = parseConfigFile("config_files/empty3.cfg", Tx_Ant=4, Rx_Ant=4)
+d = parseConfigFile("config_files/5m.cfg", Tx_Ant=2, Rx_Ant=4)
 
 print(d)

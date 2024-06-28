@@ -3,7 +3,7 @@ import numpy as np
 
 
 type_of_quantization = "default"
-saved_model_dir = "saved-model/umbc_new_cfar"
+saved_model_dir = "saved-model/umbc_tent_2_cfar"
 BATCH_SIZE = 70
 
 range_doppler_features = np.load("data/npz_files/umbc_new.npz", allow_pickle=True)
@@ -24,7 +24,7 @@ if type_of_quantization == "default":
     tflite_model = converter.convert()
 
     # Save the model.
-    with open('saved-tflite-model/range-doppler-default.tflite', 'wb') as f:
+    with open('saved-tflite-model/range-doppler-tent-2-default.tflite', 'wb') as f:
         f.write(tflite_model)
 
 elif type_of_quantization == "int8":
